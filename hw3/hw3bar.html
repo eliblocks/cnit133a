@@ -1,28 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-     <title>Homework 3</title>
-     <meta charset="utf-8">
-   <script src="files/d3.min.js"></script> 
-      <style>
-          h2 {text-align:center;}
-      </style>
+    <meta charset="utf-8">
+    <title>Bar Chart</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="d3.min.js"></script>
+
   </head>
+
   <body>
-    <h2>Students in CNIT 132</h2>
-   <script>
-	  d3.json(........, function (data) {
-         var canvas = d3.select(..........
-          
-          canvas.selectAll(...............
-			   .attr("width", function (d) { return d.students * 5; })
-			   .attr("height", 40)
-               ...........;
-          
-          canvas.selectAll(...........
-    })
-	  
-   </script>
+    <h2>Students in CNIT132</h2>
+    <script>
+
+      d3.json("hw3data.json", function(dataArray) {
+
+        var svg = d3.select("body").append("svg")
+                  .attr("height","100%")
+                  .attr("width","100%");
+
+        svg.selectAll("rect")
+            .data(dataArray)
+            .enter().append("rect")
+                  .attr("width", function(d, i) { return(d.students * 5) })
+                  .attr("height","40")
+                  .attr("y", function(d, i) { return (i * 60) + 25 })
+                  .attr("x","50")
+                  .attr("fill", "blue");
+
+        svg.selectAll("text")
+          .data(dataArray)
+          .enter().append("text")
+          .text(function(d) { return `${d.term} w/ ${d.students} students` })
+            .attr("x", 60)
+            .attr("y", function(d, i) { return(i *60) + 50 })
+            .attr("fill", "white");
+      });
+            
+    </script>
   </body>
 </html>
- 
+
+
+
