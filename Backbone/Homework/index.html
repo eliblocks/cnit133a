@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Backbone Homework</title>
+</head>
+<body>
+	<form id="addPerson" action="">
+			<input type="text" placeholder="Name" id="name">
+			<input type="number" placeholder="Age" id="age">
+			<input type="text" placeholder="Occupation" id="occupation">
+			<input type="radio" name="gender" id="gender1" value="male">
+			<label for="gender1">Male</label>
+			<input type="radio" name="gender" id="gender2" value="female">
+			<label for="gender2">Female</label>
+			<input type="submit" value="Add Person">
+	</form>
+	
+	<script id="personTemplate" type="text/template">
+		<span><strong><%= name %></strong> (<%= age %>) - <%= occupation %> - <%= gender %></span> 
+		<button class="edit">Edit</button>
+		<button class="delete">Delete</button>
+	</script>
+
+	<script src="./js/underscore.js"></script>
+	<script src="./js/jquery.js"></script>
+	<script src="./js/backbone.js"></script>
+	<script src="./js/main.js"></script>
+	<style>
+		input:focus {
+			background: yellow;
+		}
+	</style>
+</body>
+</html>
