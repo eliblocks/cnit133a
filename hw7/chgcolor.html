@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <!-- React -->
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.min.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react-dom.min.js"></script>
+      <!-- <script src="https://fb.me/react-15.2.1.min.js"></script>
+      <script src="https://fb.me/react-dom-15.2.1.min.js"></script> -->
+	<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/6.1.19/browser.js"></script>  -->
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.29/browser.js"></script>
+        <title>Check Ins</title>
+    </head>
+<body>
+   <div id="main"></div>
+<script type="text/babel">
+var App = React.createClass({
+  getInitialState: function() {
+    return {
+      name: "Anonymous",
+      date: new Date()
+    };
+  },
+
+  componentDidMount() {
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  },
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  },
+
+  tick() {
+    this.setState({
+      date: new Date()
+    });
+  },
+
+   handleNameChange: function (name) {
+    this.setState({ name: name });
+  },
+
+
+  render: function() {
+    return (
+      <div>
+        <h1>Lab Check In</h1>
+        <label>Choose a name to check in &nbsp;&nbsp;&nbsp;
+          <NameSel value={this.state.name} onNameChange={this.handleNameChange}/>
+        </label>
+        <p>Hello, {this.state.name}, you have now checked in at {this.state.date.toTimeString()}</p>
+      </div>
+      
+    )
+  }
+});
+
+// NameSel component
+var NameSel = React.createClass({
+  propTypes: {
+    value: React.PropTypes.string.isRequired,
+    onNameChange: React.PropTypes.func
+  },
+  
+  handleChange: function(e) {
+    e.preventDefault();
+    var name = e.target.value
+    if (this.props.onNameChange)
+      this.props.onNameChange(name);
+  },
+  
+  render: function() {
+    return (
+      <select value={this.props.value} onChange={this.handleChange}>
+	    <option value="white">Select Name</option>
+        <option value="Alex">Alex</option>
+        <option value="Ben">Ben</option>
+        <option value="Charlie">Charlie</option>
+        <option value="Doug">Doug</option>
+        <option value="Edward">Edward</option>
+        <option value="Frank">Frank</option>
+        <option value="Greg">Greg</option>  
+        <option value="Harry">Harry</option> 
+        <option value="Irwin">Irwin</option>
+        <option value="Jordan">Jordan</option>  
+      </select>
+    )
+  }
+});
+
+
+ReactDOM.render(<App/>, document.querySelector('#main'));
+
+</script>
+</body>
+</html>
